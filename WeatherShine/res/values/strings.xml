@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WeatherShine</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="today">Today, July 04</string>
+    <string name="highDegree">21&#x00B0;</string>
+    <string name="lowDegree">8&#x00B0;</string>
+    <string name="cloudy">Cloudy</string>
+    <string name="listTitle">Today - Sunny - 88/63</string>
+    <!-- Strings related to location -->
+     <string name="action_map">My Location</string>
+     <string name="pref_location_label">Location</string>
+     <string name="pref_location_key">location</string>
+     <string name="pref_location_default">421503</string>
+     <!--  -->
+     <!-- Strings related to Share action -->
+     <string name="action_share">Share</string>
+     <!--  -->
+    <string name="action_refresh">Refresh</string>
+    <string name="title_activity_detailed">Detailed Weather</string>
+    <string name="title_activity_detailed_weather">DetailedWeatherActivity</string>
+    <string name="title_activity_detail">DetailActivity</string>
+	<string name="title_activity_settings">Settings</string>
+	<string name="edit_pref_title">Location</string>
+	<string name="edit_pref_key">location</string>
+	<string name="edit_pref_default_value">Mumbai</string>
+	<string name="list_pref_title">Temperature Units</string>
+	<string name="list_pref_default_value">metric</string>
+	<string name="list_pref_imperial_value">imperial</string>
+	<string name="list_pref_key">units</string>
+	<string name="list_pref_key1">units</string>
+</resources>
