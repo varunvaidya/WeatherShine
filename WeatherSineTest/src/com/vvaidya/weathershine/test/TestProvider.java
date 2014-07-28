@@ -16,6 +16,8 @@ import android.util.Log;
 public class TestProvider extends AndroidTestCase {
 
 	public static final String LOG_TAG = TestProvider.class.getSimpleName();
+	
+	
 
 	public void testDeleteDb() throws Throwable {
 		mContext.deleteDatabase(WeatherDataQueryHelper.DB_NAME);
@@ -92,11 +94,36 @@ public class TestProvider extends AndroidTestCase {
 		long weatherRowId = db.insert(WeatherEntry.TABLE_NAME, null,
 				weatherValues);
 		assertTrue(weatherRowId != -1);
+		
+		Cursor weatherCursor = mContext.getContentResolver().query(WeatherEntry.CONTENT_URI, 
+				 null,
+				 null, 
+				 null, 
+				 null);
+
+		if(weatherCursor.moveToFirst())
+		validateCursor(weatherCursor, weatherValues);
+		
+		weatherCursor.close();
 
 		// A cursor is your primary interface to the query results.
-		Cursor weatherCursor = mContext.getContentResolver().query(WeatherEntry.CONTENT_URI, null, null, null, null);
+		 weatherCursor = mContext.getContentResolver().query(WeatherEntry.buildWeatherLocation(testDB.TEST_LOCATION_PCODE), 
+				null, 
+				null, 
+				null, 
+				null);
 
+		if(weatherCursor.moveToFirst())
 		validateCursor(weatherCursor, weatherValues);
+		
+		weatherCursor.close();
+		
+		weatherCursor = mContext.getContentResolver().query(WeatherEntry.buildWeatherLocationWithStartDate(testDB.TEST_LOCATION_PCODE, testDB.TEST_START_DATE), null, null, null, null);
+
+		if(weatherCursor.moveToFirst())
+		validateCursor(weatherCursor, weatherValues);
+		
+		weatherCursor.close();
 
 		dbHelper.close();
 
