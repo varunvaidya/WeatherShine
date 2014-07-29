@@ -132,6 +132,14 @@ public class testDB extends AndroidTestCase {
 		validateCursor(weatherCursor, weatherValues);
 		
 		weatherCursor.close();
+		
+		// get Weather using Postal Code and Date
+		weatherCursor = mContext.getContentResolver().query(WeatherEntry.buildWeatherLocationWithDate(testDB.TEST_LOCATION_PCODE, testDB.TEST_START_DATE), null, null, null, null);
+
+		if(weatherCursor.moveToFirst())
+		validateCursor(weatherCursor, weatherValues);
+				
+		weatherCursor.close();
 
 		
 
