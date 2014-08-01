@@ -1,5 +1,9 @@
 package com.vvaidya.weathershine.data;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
@@ -13,6 +17,24 @@ public class WeatherContract {
 
 	public static final String PATH_LOCATION = "location";
 	public static final String PATH_WEATHER = "weather";
+	public static final String DATE_FORMAT = "yyyyMMdd";
+	
+	public static String getDbDateString(Date date){
+        // Because the API returns a unix timestamp (measured in seconds),
+        // it must be converted to milliseconds in order to be converted to valid date.
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        return sdf.format(date);
+    }
+	
+	 public static Date getDateFromDb(String dateText) {
+	        SimpleDateFormat dbDateFormat = new SimpleDateFormat(DATE_FORMAT);
+	        try {
+	            return dbDateFormat.parse(dateText);
+	        } catch ( ParseException e ) {
+	            e.printStackTrace();
+	            return null;
+	        }
+	    }
 
 	public static final class WeatherEntry implements BaseColumns {
 
