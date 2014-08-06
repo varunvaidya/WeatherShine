@@ -89,7 +89,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
      * Fortunately parsing is easy:  constructor takes the JSON string and converts it
      * into an Object hierarchy for us.
      */
-    private String[] getWeatherDataFromJson(String forecastJsonStr, int numDays , String locationQuery)
+    private void getWeatherDataFromJson(String forecastJsonStr, int numDays , String locationQuery)
             throws JSONException {
  
         // These are the names of the JSON objects that need to be extracted.
@@ -200,10 +200,15 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
             String day = getReadableDateString(dateTime);
             resultStrs[i] = day + " - " + description + " - " + highAndLow;*/
         }
-        ContentValues[] cValues = (ContentValues[]) cVVector.toArray();
-        int updatedRows = mContext.getContentResolver().bulkInsert(WeatherContract.WeatherEntry.CONTENT_URI, cValues);
-       Log.v(LOG_TAG, "No of rows updated in Weather Table are "+updatedRows);
-        return resultStrs;
+        
+        if(cVVector.size() > 0)
+        {
+        	 ContentValues[] cValues =  new ContentValues[cVVector.size()];
+        	 cVVector.toArray(cValues);
+        	 mContext.getContentResolver().bulkInsert(WeatherContract.WeatherEntry.CONTENT_URI, cValues);
+        }
+       Log.v(LOG_TAG, "No of rows updated in Weather Table are "+cVVector.size());
+       // return resultStrs;
  
     }
     @Override
@@ -276,6 +281,13 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
               
             }
             forecastJsonStr = buffer.toString();
+            try {
+				getWeatherDataFromJson(forecastJsonStr,numDays,locationQuery);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
             // If the code didn't successfully get the weather data, there's no point in attemping

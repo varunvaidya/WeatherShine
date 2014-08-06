@@ -123,9 +123,12 @@ public class ForecastFragment extends Fragment implements
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
 
-				/*String forecast = mForecastAdapter.getItem(position);
-				// Toast.makeText(getActivity(), forecast,
-				// Toast.LENGTH_SHORT).show();
+				mLocation = Utility.getPreferredLocation(getActivity());
+				/*String date
+				Uri weatherForLocationUri = WeatherEntry.buildWeatherLocationWithStartDate(
+		                mLocation, startDate);*/
+				/*Toast.makeText(getActivity(), forecast,
+				Toast.LENGTH_SHORT).show();
 				Intent detailIntent = new Intent(getActivity(),
 						DetailActivity.class).putExtra(Intent.EXTRA_TEXT,
 						forecast);
@@ -246,9 +249,9 @@ public class ForecastFragment extends Fragment implements
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 		
 		 mForecastAdapter.swapCursor(data);
-		    if ( !mLocation.equals(Utility.getPreferredLocation(getActivity())) ) {
+		  /*  if ( !mLocation.equals(Utility.getPreferredLocation(getActivity())) ) {
 		        getLoaderManager().restartLoader(FORECAST_LOADER, null, this);
-		    }
+		    }*/
 	}
 
 	@Override
